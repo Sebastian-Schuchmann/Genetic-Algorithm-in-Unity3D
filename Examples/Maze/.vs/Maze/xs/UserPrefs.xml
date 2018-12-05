@@ -1,0 +1,16 @@
+﻿<Properties StartupConfiguration="{203E294F-6A57-B963-05D6-83EB30201135}|">
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="Unity.Editor" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/FishController.cs">
+    <Files>
+      <File FileName="Assets/PlayerController.cs" Line="15" Column="60" />
+      <File FileName="Assets/Scripts/FishController.cs" Line="76" Column="39" />
+      <File FileName="Assets/Scripts/Evolution.cs" Line="63" Column="36" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MultiItemStartupConfigurations />
+</Properties>

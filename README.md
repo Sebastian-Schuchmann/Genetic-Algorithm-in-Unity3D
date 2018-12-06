@@ -5,6 +5,8 @@
 
 *The goal in this game is for the blue cubes to reach the green goal line. They have a preset amount of moves which gets optimized over time by the genetic algorithm.*
 
+If you like this repo make sure to follow me [@seppischuchmann](https://www.instagram.com/seppischuchmann/) 👋.
+
 ## Prerequisites
 The Project was made using Unity 2018.2.3f1 but prior versions should work fine, too. 
 
@@ -21,3 +23,10 @@ First, you need to create a population with the type you want to evolve. You may
 Second, you need to update the Fitness for each DNA via the UpdateFitness function (you can do this as many times as you want):
 
 ![](https://github.com/Sebastian-Schuchmann/Genetic-Algorithm-in-Unity3D/blob/master/README%20Images/Fitness.png?raw=true)
+
+
+
+
+**Check out the Maze Example to see this in action!**
+
+

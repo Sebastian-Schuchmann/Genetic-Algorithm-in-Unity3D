@@ -17,3 +17,7 @@ Unity is a great platform for rapid prototyping on any platform.
 First, you need to create a population with the type you want to evolve. You may need to write your own functions for Selection, Crossover and Mutation, because they are different for each datatype (functions for Vector2 and Vector3 and supplied). 
 
 ![](https://github.com/Sebastian-Schuchmann/Genetic-Algorithm-in-Unity3D/blob/master/README%20Images/Setup.png?raw=true)
+
+Second, you need to update the Fitness for each DNA via the UpdateFitness function (you can do this as many times as you want):
+
+![](https://github.com/Sebastian-Schuchmann/Genetic-Algorithm-in-Unity3D/blob/master/README%20Images/Fitness.png?raw=true)

@@ -22,7 +22,7 @@ public static class EvolutionHelper {
         return combinedVector;  
     }
 
-    public static List<Vector2> CombineVectorListsRandomly(List<Vector2> VecA, List<Vector2> VecB)
+    public static List<Vector2> CrossoverVec2(List<Vector2> VecA, List<Vector2> VecB)
     {
         int maxRange = Mathf.Min(VecA.Count, VecB.Count);
         List<Vector2> combinedVector = new List<Vector2>();

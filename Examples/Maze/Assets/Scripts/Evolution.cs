@@ -9,7 +9,7 @@ public class Evolution : MonoBehaviour {
     public int PopulationSize;
     public float MutationRate;
     public SelectionType selectionType;
-    public int AmountMoves;
+    public int PropertiesLength;
 
     public FishController Prefab;
     List<FishController> Fishes;
@@ -24,10 +24,15 @@ public class Evolution : MonoBehaviour {
 
 	void Start () {
         
-        population = new Population<Vector2>(PopulationSize, MutationRate, selectionType,
-                                             AmountMoves,EvolutionHelper.RandomVector2,
-                                             EvolutionHelper.CombineVectorListsRandomly,
-                                             EvolutionHelper.MutateMoveset);
+        population = new Population<Vector2>(PopulationSize,
+                                             MutationRate, //around 0.01 - 0.1
+                                             selectionType, //Eletist, WheelOfFortune
+                                             PropertiesLength, //e.g. amount of Moves, length of String
+                                             EvolutionHelper.RandomVector2, //Function for generating a random Set of T
+                                             EvolutionHelper.CrossoverVec2, //Crossover function for List<Vector2>
+                                             EvolutionHelper.MutateMoveset //Mutation function for List<Vector2>
+                                            );
+        
         Fishes = new List<FishController>();
         CreateFishesFromPrefab();
 	}

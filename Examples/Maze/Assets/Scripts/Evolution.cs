@@ -15,6 +15,10 @@ public class Evolution : MonoBehaviour {
     List<FishController> Fishes;
     int MovesCompleted;
 
+    //Later in extra Class!
+    public TMPro.TextMeshProUGUI GenerationCountDisplay;
+    int generationCounter;
+
     public float TimeScale;
 
 
@@ -46,9 +50,11 @@ public class Evolution : MonoBehaviour {
     void MoveCompletedCheck(){
         MovesCompleted++;
         if(MovesCompleted >= PopulationSize){
-
             population.EvaluateFitness();
             MovesCompleted = 0;
+            //Update GUI
+            generationCounter++;
+            GenerationCountDisplay.text = generationCounter.ToString();
         } 
     }
 
@@ -57,7 +63,6 @@ public class Evolution : MonoBehaviour {
             Fish.dna.PrintMoveSet();
         }
     }
-
 
 	void Update () {
         Time.timeScale = TimeScale;

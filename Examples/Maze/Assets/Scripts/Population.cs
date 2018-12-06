@@ -11,7 +11,7 @@ public enum SelectionType {
 
 public class Population<T> {
     
-    public ObservableCollection<DNA<T>> Genes;
+    public List<DNA<T>> Genes;
     DNA<T> BestGene;
     DNA<T> SecondBestGene;
     SelectionType selectionType;
@@ -24,7 +24,7 @@ public class Population<T> {
     readonly Func<List<T>, float, List<T>> Mutate;
 
     public Population(int popSize, float mutRate, SelectionType slctType, int amtMoves, Func<int, T> GenerateRNDMove, Func<List<T>, List<T>, List<T>> CrssOver, Func<List<T>, float, List<T>> Mtate){
-        Genes = new ObservableCollection<DNA<T>>();
+        Genes = new List<DNA<T>>();
 
         PopulationSize = popSize;
         MutationRate = mutRate;
@@ -50,8 +50,8 @@ public class Population<T> {
             BestGene.SetBest(true);
             return;
         }
-        //Lower Score is better
-        if(BestGene.FitnessScore > gene.FitnessScore){
+        //Higher Score is better
+        if(BestGene.FitnessScore < gene.FitnessScore){
             BestGene.SetBest(false);
             SecondBestGene = BestGene;
             BestGene = gene;
@@ -64,7 +64,7 @@ public class Population<T> {
             return;
         }
 
-        if(SecondBestGene.FitnessScore > gene.FitnessScore){
+        if(SecondBestGene.FitnessScore < gene.FitnessScore){
             SecondBestGene = gene;
         }
     }
@@ -87,6 +87,48 @@ public class Population<T> {
     {
         if(selectionType == SelectionType.Elitist){
             MatePopulation();
+        }
+        if(selectionType == SelectionType.WheelOfFortune)
+        {
+            NormalizeFitness();
+            foreach (DNA<T> Gene in Genes){
+                //Select two Parents with a Chance according to Fitness
+                DNA<T> ParentA = MonteCarloSelector();
+                DNA<T> ParentB = MonteCarloSelector();
+
+                List<T> Moveset = Crossover(
+                    ParentA.GetMoveSet(),
+                    ParentB.GetMoveSet());
+
+                Moveset = Mutate(Moveset, MutationRate);
+                Gene.UpdateMoveset(Moveset);
+            }
+        }
+    }
+
+    //Chooses a Random Canidate and then he has a Chance
+    //which is as high as his fitness score - to be selected 
+    private DNA<T> MonteCarloSelector()
+    {
+        do{
+            DNA<T> Canidate = Genes[UnityEngine.Random.Range(0, Genes.Count)];
+            if (UnityEngine.Random.Range(0f, 1f) < Canidate.FitnessScore){
+                return Canidate;
+            }
+        }while (true);
+    }
+
+    private void NormalizeFitness()
+    {
+        //Calculate Sum of all Fitness Scores
+        float FitnessSum = 0.0f;
+        foreach(DNA<T> Gene in Genes){
+            FitnessSum += Gene.FitnessScore; 
+        }
+
+        //Normalize all Scores between 0 and 1
+        foreach (DNA<T> Gene in Genes){
+            Gene.FitnessScore /= FitnessSum;
         }
     }
 }

@@ -125,4 +125,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Goal: {fileID: 0}
+  FitnessExponent: 4
+  basePosition: {x: 0, y: 0}
   Speed: 1000

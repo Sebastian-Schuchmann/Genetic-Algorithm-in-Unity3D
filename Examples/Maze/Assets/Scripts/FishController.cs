@@ -6,13 +6,14 @@ using UnityEngine;
 public class FishController : MonoBehaviour {
 
     public Transform Goal;
-   
+    public int FitnessExponent = 4;
     public DNA<Vector2> dna;
     Rigidbody2D rigidbodyFish;
     Color baseColor;
     public Vector2 basePosition;
     int moveCount;
-    int reachedGoalCounter;
+    float maxDistance;
+
 
     public float Speed = 10.0f;
     bool DoMove;
@@ -21,6 +22,8 @@ public class FishController : MonoBehaviour {
     //Events
     public event Action MovesCompleted;
 
+    //NOTIZEN:
+    //Jeden einzelenen Move mit Fitness bewerten
     void Start()
     {
         rigidbodyFish = GetComponent<Rigidbody2D>();
@@ -28,13 +31,13 @@ public class FishController : MonoBehaviour {
         DoMove = true;
         Goal = GameObject.Find("Goal").transform;
         Goal.GetComponent<GoalController>().Collided += GoalUpdated;
+        maxDistance = Vector2.Distance(transform.position, Goal.position);
     }
 
     public void StartMove(){
         transform.position = basePosition;
         currentMove = 0;
         moveCount = 0;
-        reachedGoalCounter = 0;
         DoMove = true;
     }
 
@@ -70,15 +73,9 @@ public class FishController : MonoBehaviour {
 
     void UpdateFitness(){
         float Distance = Vector2.Distance(transform.position, Goal.position);
-
-        if (Distance < 1f)
-        {
-            Debug.Log("Reached Goal");
-            reachedGoalCounter++;
-        }
-        Distance = Mathf.Pow(Distance, 1);
-        Distance -= reachedGoalCounter;
-        dna.UpdateFitness(Distance);
+        //We need more to be way better, not just better
+        float Fitness = Mathf.Pow((maxDistance - Distance), FitnessExponent);
+        dna.UpdateFitness(Fitness);
     }
 
     void GoalUpdated(){

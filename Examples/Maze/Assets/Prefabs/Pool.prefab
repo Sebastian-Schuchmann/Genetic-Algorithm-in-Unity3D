@@ -56,4 +56,5 @@ MonoBehaviour:
   selectionType: 0
   AmountMoves: 600
   Prefab: {fileID: 114747789187866800, guid: 04fdc68cd0d3c46358abc07a1bb4130d, type: 2}
+  GenerationCountDisplay: {fileID: 0}
   TimeScale: 1
